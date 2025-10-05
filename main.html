@@ -3,79 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Video Player</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Basic styling */
-    .player {
-      max-width: 750px;
-      margin: 20px auto;
-      border: 2px solid #ccc;
-      display: flex;
-      flex-direction: column;
-      background: #f5f5f5;
-      border-radius: 5px;
-    }
-
-    video {
-      width: 100%;
-      border-bottom: 2px solid #ccc;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px;
-    }
-
-    .progress {
-      flex: 1;
-      height: 10px;
-      background: #ddd;
-      margin: 0 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .progress__filled {
-      width: 0%;
-      height: 100%;
-      background: #2196f3;
-      flex-basis: 0%;
-      border-radius: 5px;
-    }
-
-    input[type="range"] {
-      width: 100px;
-    }
-
-    button {
-      padding: 5px 10px;
-      margin: 0 2px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Grofers Checkout</title>
 </head>
 <body>
 
-<div class="player">
-  <video class="viewer" src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+<h2>Grocery List</h2>
 
-  <div class="controls">
-    <button class="player__button">►</button>
-    <button data-skip="-10">« 10s</button>
-    <button data-skip="25">25s »</button>
-    <input type="range" class="volume" min="0" max="1" step="0.05" value="1">
-    <input type="range" class="playbackSpeed" min="0.5" max="2" step="0.1" value="1">
-  </div>
+<table id="grocery-table" border="1">
+  <tr>
+    <th>Item</th>
+    <th>Price</th>
+  </tr>
+  <tr class="item">
+    <td class="name">Apple</td>
+    <td class="prices">30</td>
+  </tr>
+  <tr class="item">
+    <td class="name">Banana</td>
+    <td class="prices">10</td>
+  </tr>
+  <tr class="item">
+    <td class="name">Orange</td>
+    <td class="prices">20</td>
+  </tr>
+</table>
 
-  <div class="progress">
-    <div class="progress__filled"></div>
-  </div>
-</div>
-
-<script src="scripts.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

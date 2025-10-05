@@ -1,62 +1,24 @@
-const video = document.querySelector(".viewer");
-const toggleButton = document.querySelector(".player__button");
-const volumeSlider = document.querySelector(".volume");
-const playbackSpeedSlider = document.querySelector(".playbackSpeed");
-const skipButtons = document.querySelectorAll("[data-skip]");
-const progress = document.querySelector(".progress");
-const progressBar = document.querySelector(".progress__filled");
+// Select all price cells
+const priceCells = document.querySelectorAll(".prices");
 
-// Toggle play/pause
-function togglePlay() {
-  if (video.paused) {
-    video.play();
-    toggleButton.textContent = "❚ ❚";
-  } else {
-    video.pause();
-    toggleButton.textContent = "►";
-  }
-}
+let totalPrice = 0;
 
-// Update progress bar
-function handleProgress() {
-  const percent = (video.currentTime / video.duration) * 100;
-  progressBar.style.width = `${percent}%`;
-}
+// Loop through each price cell and sum up the prices
+priceCells.forEach(cell => {
+  // Convert text content to number and add to total
+  totalPrice += parseFloat(cell.textContent);
+});
 
-// Scrub to clicked position
-function scrub(e) {
-  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-  video.currentTime = scrubTime;
-}
+// Create a new row for total
+const table = document.getElementById("grocery-table");
+const totalRow = document.createElement("tr");
 
-// Update volume
-function handleVolume() {
-  video.volume = this.value;
-}
+// Create a single cell spanning 2 columns
+const totalCell = document.createElement("td");
+totalCell.colSpan = 2;  // spans across Item and Price columns
+totalCell.style.fontWeight = "bold";
+totalCell.textContent = `Total Price: ${totalPrice}`;
 
-// Update playback speed
-function handlePlaybackSpeed() {
-  video.playbackRate = this.value;
-}
-
-// Skip video
-function skip() {
-  video.currentTime += parseFloat(this.dataset.skip);
-}
-
-// Event listeners
-video.addEventListener("click", togglePlay);
-video.addEventListener("timeupdate", handleProgress);
-toggleButton.addEventListener("click", togglePlay);
-
-volumeSlider.addEventListener("input", handleVolume);
-playbackSpeedSlider.addEventListener("input", handlePlaybackSpeed);
-
-skipButtons.forEach(button => button.addEventListener("click", skip));
-
-// Scrub with mouse
-let mousedown = false;
-progress.addEventListener("click", scrub);
-progress.addEventListener("mousemove", (e) => mousedown && scrub(e));
-progress.addEventListener("mousedown", () => mousedown = true);
-progress.addEventListener("mouseup", () => mousedown = false);
+// Append the cell to the row and row to the table
+totalRow.appendChild(totalCell);
+table.appendChild(totalRow);
